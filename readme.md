@@ -67,7 +67,7 @@ http://localhost:5000
 
 * /people
 ```
-http://localhost:5000/people/{name}/gender
+http://localhost:5000/people/{name}/{gender}
 ```
 
 Onde, a rota `/` não faz muita coisa, ele já tem um nome e sexo setados, só retorna um html com o resultado disso.
