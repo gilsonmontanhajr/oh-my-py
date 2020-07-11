@@ -1,0 +1,31 @@
+<!-- /templates/json_form.html -->
+<html>
+    <body>
+        <form action="/json-return" method="post">
+            <table>
+                <tr>
+                    <th>Name : </th>
+                    <th>Gender : </th>
+                </tr>
+                <tr>
+                    <td><input type="text" name="name"></td>
+                    <td><input type="text" name="gender"></td>
+                </tr>
+                <tr colspan="2">
+                    <td>
+                        <input type="submit">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </body>
+<!-- Minimal Styling -->
+<style>
+    form {
+        margin: 2%
+    }
+    table {
+        margin: 2% 0;
+    }
+</style>
+</html>
