@@ -100,19 +100,36 @@ Este aqui já é um pouco mais avançado, utilizo as libs do `Flask` e do `MySQL
 
 É um pequeno serviço que testa a conexão com o MySQL.
 
-A rota de acesso é `/mysql` : 
+A rota de acesso é `/my` : 
 
 ```
-http://localhost:5000/mysql
+http://localhost:5000/my
 ```
 
-É um formulário formatado com CSS onde você entra com as informações e ele busca uma classe uma rota chamada `test_mysql` que vai tentar conectar no banco referente às informações.
+É um formulário formatado com CSS onde você entra com as informações e ele busca uma classe uma rota chamada `mysql_test` que vai tentar conectar no banco referente às informações passadas no formulário.
+
+
+
+## postgres_test_conn
+
+Utilizando o python para conectar no PostgreSQL.
+
+Ele utiliza uma lib chamada `psycopg2`.
+
+OBS: Essa lib é bem chata de instalar (o pip quer buildar ela), então instale a `pycopg-binary`.
+
+A rota de acesso é `/pg` : 
+
+```
+http://localhost:5000/pg
+```
+
+Utiliza basicamente o mesmo formulário do MySQL.
 
 
 
 ## TODO
 
-* Conexão com PostgreSQL
 * Conexão com MongoDB
 * Conexão com Kubernetes
   * Get pods
