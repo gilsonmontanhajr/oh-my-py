@@ -1,13 +1,12 @@
 from flask import Flask, render_template, request
 import mysql.connector
 
+
 app = Flask(__name__)
 
-# MYSQL TREATMENT
 
-class mysql_util():
+class mysqlUtil:
     def connect(uri, user, passwd):
-
         try:
             conn = mysql.connector.connect(
                 host=uri,
@@ -39,9 +38,9 @@ def mysql_connect():
     print("db_pass = " + db_pass)
     print("db_name = " + db_name)
 
-    # Creating object
-    my = mysql_util
-    #my.connect(db_uri, db_user, db_pass, db_name)
+    # Creating objects
+    # MySQL
+    my = mysqlUtil
 
     return render_template('my_test.html', connect=my.connect(db_uri, db_user, db_pass))
 
