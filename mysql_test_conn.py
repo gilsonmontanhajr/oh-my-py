@@ -14,7 +14,6 @@ class mysql_util():
                 user=user,
                 password=passwd
             )
-            #cursor = conn.cursor()
             print(conn.get_server_info())
 
         except mysql.connector.Error as err:
