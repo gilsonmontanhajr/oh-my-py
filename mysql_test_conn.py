@@ -21,12 +21,12 @@ class mysql_util():
 
         return conn
 
-@app.route("/my_test", methods=['GET'])
+@app.route("/my", methods=['GET'])
 def mysql_connect_form():
-    return render_template("mysql_connect.html")
+    return render_template("my_connect.html")
 
 
-@app.route("/mysql_connect", methods=['POST'])
+@app.route("/my_test", methods=['POST'])
 def mysql_connect():
     # vars
     db_uri = request.form['db_uri']
@@ -43,7 +43,7 @@ def mysql_connect():
     my = mysql_util
     #my.connect(db_uri, db_user, db_pass, db_name)
 
-    return render_template('mysql_test.html', connect=my.connect(db_uri, db_user, db_pass))
+    return render_template('my_test.html', connect=my.connect(db_uri, db_user, db_pass))
 
 app.run(debug=True)
 
