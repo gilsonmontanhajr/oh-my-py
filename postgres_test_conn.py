@@ -4,24 +4,31 @@ import psycopg2
 app = Flask(__name__)
 
 
-class pg_util:
-    def pg_connect(pg_user, pg_pass, pg_host, pg_dbname):
+class pgUtil:
+    def connect(pg_user, pg_pass, pg_host, pg_dbname):
         try:
-            connection = psycopg2.connect(
-                host=pg_host,
+            conn = psycopg2.connect(
                 user=pg_user,
                 password=pg_pass,
-                dbname=pg_dbname
-            )
-        except:
-            connection = None
+                host=pg_host,
+                port="5432",
+                database=pg_dbname)
+            cursor = conn.cursor()
+            print(conn.get_dsn_parameters(), "\n")
+            cursor.execute("SELECT version();")
+            record = cursor.fetchone()
+            print("You are connected to - ", record, "\n")
 
-        return connection
+        except (Exception, psycopg2.Error) as err:
+            print("Error trying to connect ", err)
+
+        return conn
 
 
 @app.route("/pg", methods=['GET'])
 def pg_connect_form():
     return render_template("pg_connect.html")
+
 
 @app.route("/pg_test", methods=['POST'])
 def pg_test_conn():
@@ -35,13 +42,8 @@ def pg_test_conn():
     print("db_pass = " + db_pass)
     print("db_name = " + db_name)
 
-    pg = pg_util
-    conn_return = pg.pg_connect(
-        db_uri,
-        db_user,
-        db_pass,
-        db_name
-    )
-    return render_template('pg_test.html', connect=conn_return)
+    pg = pgUtil.connect(db_user, db_pass, db_uri, db_name)
+
+    return render_template('pg_test.html', connect=pg)
 
 app.run(debug=True)
