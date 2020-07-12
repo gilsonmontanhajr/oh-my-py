@@ -6,15 +6,23 @@ app = Flask(__name__)
 # MYSQL TREATMENT
 
 class mysql_util():
-    def connect(uri, user, passwd, dbname):
-        mydb = mysql.connector.connect(
-            host=uri,
-            user=user,
-            password=passwd
-        )
-        return mydb
+    def connect(uri, user, passwd):
 
-@app.route("/mysql", methods=['GET'])
+        try:
+            conn = mysql.connector.connect(
+                host=uri,
+                user=user,
+                password=passwd
+            )
+            #cursor = conn.cursor()
+            print(conn.get_server_info())
+
+        except mysql.connector.Error as err:
+            print("Error trying to connect : ", err)
+
+        return conn
+
+@app.route("/my_test", methods=['GET'])
 def mysql_connect_form():
     return render_template("mysql_connect.html")
 
@@ -36,7 +44,7 @@ def mysql_connect():
     my = mysql_util
     #my.connect(db_uri, db_user, db_pass, db_name)
 
-    return render_template('mysql_test.html', connect=my.connect(db_uri, db_user, db_pass, db_name))
+    return render_template('mysql_test.html', connect=my.connect(db_uri, db_user, db_pass))
 
 app.run(debug=True)
 
